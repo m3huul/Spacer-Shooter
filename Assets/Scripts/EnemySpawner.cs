@@ -28,6 +28,7 @@ public class EnemySpawner : MonoBehaviour
         nextSpawn();
 
     }
+
     void nextSpawn(){
         float spawnInSecs;
         if(MaxSpawnRate>1f){

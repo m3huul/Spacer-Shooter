@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject PlayerShip;
-    public GameObject PlayButton;
-    public GameObject GameOver;
-
     public GameObject EnemySpawner;
     public GameObject scoreTextUI;
     public GameObject TimeCounterUI;
+    public GameScore Current;
+    public Text HighScoreText;
+    public CanvasGroup GameplayUI;
+    public CanvasGroup OpeningUI;
+    public CanvasGroup GameOverUI;
     public enum GameMangerState
     {
         Opening,
@@ -22,30 +25,60 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         GMState=GameMangerState.Opening;
+        UpdateGameManagerState();
     }
 
     void UpdateGameManagerState(){
         switch(GMState){
+
             case GameMangerState.Opening:
-                PlayButton.SetActive(true);
-                GameOver.SetActive(false);
+                GameOverUI.alpha = 0f;
+                if (PlayerPrefs.HasKey("HighScore"))
+                {
+                    HighScoreText.gameObject.SetActive(true);
+                    HighScoreText.text = "HIGHEST SCORE:\n" + PlayerPrefs.GetInt("HighScore");
+                }
+                else
+                {
+                    HighScoreText.gameObject.SetActive(false);
+                }
+                StopAllCoroutines();
+                StartCoroutine(Lerp(OpeningUI, 2f, 0f, 1f));
+
+                PlayerShip.transform.position=new Vector3(0,0,0);
+                PlayerShip.SetActive(true);
                 break;
 
             case GameMangerState.Gameplay:
+                OpeningUI.alpha = 0f;
+
+                StopAllCoroutines();
+                StartCoroutine(Lerp(GameplayUI, 2f, 0, 1));
 
                 scoreTextUI.GetComponent<GameScore>().Score = 0;
-                PlayButton.SetActive(false);
+
                 PlayerShip.GetComponent<PlayerMovement>().Init();
                 EnemySpawner.GetComponent<EnemySpawner>().StartSpawner();
                 TimeCounterUI.GetComponent<TimeCounter>().StartTimeCounter();
                 break;
 
-            case GameMangerState.GameOver:  
+            case GameMangerState.GameOver:
+                if (PlayerPrefs.HasKey("HighScore") && PlayerPrefs.GetInt("HighScore")<Current.Score)
+                {
+                    PlayerPrefs.SetInt("HighScore", Current.Score);
+                }
+                else
+                {
+                    PlayerPrefs.SetInt("HighScore", Current.Score);
+                }
+                GameplayUI.alpha = 0f;
+                StopAllCoroutines();
+                StartCoroutine(Lerp(GameOverUI, 2f, 0, 1));
+
                 TimeCounterUI.GetComponent<TimeCounter>().StopTimeCounter(); 
                 EnemySpawner.GetComponent<EnemySpawner>().StopSpawner();
-                GameOver.SetActive(true);
-                Invoke("ChangeToOpening",8f);
 
+                Invoke("ChangeToOpening",8f);
                 break;      
         }
 
@@ -63,5 +96,19 @@ public class GameManager : MonoBehaviour
 
     public void ChangeToOpening(){
         SetGameManagerState(GameMangerState.Opening);
+    }
+
+    IEnumerator Lerp(CanvasGroup group, float seconds, float from, float to)
+    {
+        float startTime = Time.time;
+        float endTime=startTime + seconds;
+        while(Time.time < endTime)
+        {
+            float elapsedTime = Time.time - startTime;
+            float alpha = Mathf.Lerp(from, to, elapsedTime / seconds);
+            group.alpha = alpha;
+            yield return null;
+        }
+        group.alpha = to;
     }
 }
