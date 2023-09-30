@@ -19,16 +19,32 @@ public class StarGenerator : MonoBehaviour
         Vector2 min=Camera.main.ViewportToWorldPoint(new Vector2(0,0));
         Vector2 max=Camera.main.ViewportToWorldPoint(new Vector2(1,1));
 
-        for(int i=0; i < MaxStars; ++i){
-            GameObject star=(GameObject)Instantiate(Star);
+#if UNITY_ANDROID
+        for (int i = 0; i < MaxStars; ++i)
+        {
+            GameObject star = (GameObject)Instantiate(Star);
 
-            star.GetComponent<SpriteRenderer>().color=starColors[i % starColors.Length]; //setting star colours
+            star.GetComponent<SpriteRenderer>().color = starColors[i % starColors.Length]; //setting star colours
 
-            star.transform.position=new Vector2(Random.Range(min.x,max.x),Random.Range(min.y,max.y));
+            star.transform.position = new Vector2(Random.Range(min.x, max.x), Random.Range(min.y, max.y));
 
-            star.GetComponent<Star>().speed=-(1f*Random.value+0.5f);
+            star.GetComponent<Star>().speed = -(1f * Random.value + 0.5f);
 
-            star.transform.parent=transform; //making star a child of StarGenerator
+            star.transform.parent = transform; //making star a child of StarGenerator
         }
+#else
+        for (int i = 0; i < MaxStars; ++i)
+        {
+            GameObject star = (GameObject)Instantiate(Star);
+
+            star.GetComponent<SpriteRenderer>().color = starColors[i % starColors.Length]; //setting star colours
+
+            star.transform.position = new Vector2(Random.Range(min.x, max.x), Random.Range(min.y, max.y));
+
+            star.GetComponent<Star>().speed = -(1f * Random.value + 0.5f);
+
+            star.transform.parent = transform; //making star a child of StarGenerator
+        }
+#endif
     }  
 }

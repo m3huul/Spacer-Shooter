@@ -6,27 +6,19 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject Enemy;
     float MaxSpawnRate=7f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void SpawnEnemy(){
         Vector2 min=Camera.main.ViewportToWorldPoint(new Vector2(0,0));//bottom-left
         Vector2 max=Camera.main.ViewportToWorldPoint(new Vector2(1,1));//top-right
 
         GameObject enemyposi=(GameObject)Instantiate(Enemy);
+#if UNITY_ANDROID
+        enemyposi.transform.position=new Vector2(Random.Range(min.x, max.x), max.y);
+#else
         enemyposi.transform.position=new Vector2(max.x,Random.Range(min.y,max.y));
+#endif
 
         nextSpawn();
-
     }
 
     void nextSpawn(){

@@ -78,6 +78,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -544,6 +545,25 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      spaceships_17: -6535869365221959541
+      spaceships_5: -2191450496024337236
+      spaceships_15: 6326970610496640776
+      spaceships_6: -7515621973919708018
+      spaceships_12: -3888155839206989342
+      spaceships_7: -8083001151750224657
+      spaceships_16: -8641889545522060506
+      spaceships_2: 1132676901880397304
+      spaceships_9: 8986076673061562683
+      spaceships_13: -4987703842415084301
+      spaceships_14: -1219994373654289188
+      spaceships_11: -1312474859769202374
+      spaceships_8: -3411013259566357033
+      spaceships_0: 8964348670299197311
+      spaceships_1: -9062304531134733656
+      spaceships_4: -8868581108171312049
+      spaceships_3: 7730256063860039076
+      spaceships_10: -232062793811561830
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
