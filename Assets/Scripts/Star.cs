@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Star : MonoBehaviour
 {
-    public float speed;
+    [SerializeField] internal float speed;
     Vector2 min;
     Vector2 max;
     // Start is called before the first frame update

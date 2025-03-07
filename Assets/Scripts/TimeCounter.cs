@@ -15,13 +15,12 @@ public class TimeCounter : MonoBehaviour
         startCounter=false;
         timeUI=GetComponent<Text>();
     }
-    public void StartTimeCounter(){
+    internal void StartTimeCounter(){
         startTime=Time.time;
         startCounter=true;
     }
-    public void StopTimeCounter(){
+    internal void StopTimeCounter(){
         startCounter=false;
-
     }
 
     // Update is called once per frame

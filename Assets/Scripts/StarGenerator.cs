@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class StarGenerator : MonoBehaviour
 {
-    public GameObject Star;
-    public int MaxStars;
+    [SerializeField] private GameObject Star;
+    [SerializeField] private int MaxStars;
 
     public Color[] starColors={
         new Color (0.5f,0.5f,1f),

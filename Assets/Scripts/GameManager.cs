@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CanvasGroup GameplayUI;
     [SerializeField] private CanvasGroup OpeningUI;
     [SerializeField] private CanvasGroup GameOverUI;
-    public enum GameMangerState
+    enum GameMangerState
     {
         Opening,
         Gameplay,
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void SetGameManagerState(int i){  //0 to set the gamestate to opening and 1 for game over.
+    internal void SetGameManagerState(int i){  //0 to set the gamestate to opening and 1 for game over.
         switch(i){
           case 0:
             GMState = GameMangerState.Opening;
@@ -95,12 +95,12 @@ public class GameManager : MonoBehaviour
         UpdateGameManagerState();
     }
     
-    public void StartGamePlay(){
+    internal void StartGamePlay(){
         GMState=GameMangerState.Gameplay;
         UpdateGameManagerState();
     }
 
-    public void ChangeToOpening(){
+    internal void ChangeToOpening(){
         SetGameManagerState(0); //setting game state to opening.
     }
 

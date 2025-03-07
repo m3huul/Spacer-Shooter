@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
-    public float speed;
+    [SerializeField] private float speed;
     Vector2 max;
     Vector2 min;
     void Start()
