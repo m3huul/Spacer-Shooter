@@ -1,24 +1,22 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 public class PlayerMovement : MonoBehaviour
 {
-    public GameObject GameManager;
-
-    public GameObject PlayerBullet;
-    public GameObject PlayerBullet01;
-    public GameObject PlayerBullet02;
-    public GameObject ExplosionAinm;
-    public float speed;
-    public bool stop=true;
-    public Text LiveUIText;
+    [SerializeField] private GameObject GameManager;
+    [SerializeField] private GameObject PlayerBullet;
+    [SerializeField] private GameObject PlayerBullet01;
+    [SerializeField] private GameObject PlayerBullet02;
+    [SerializeField] private GameObject ExplosionAinm;
+    [SerializeField] private float speed;
+    [SerializeField] private bool stop=true;
+    [SerializeField] private Text LiveUIText;
     [SerializeField] private float cooldownTime=1f;
-    const int MaxLives=3;
-    int Lives;
-    bool canShoot=true;
+    private const int MaxLives=3;
+    private int Lives;
+    private bool canShoot=true;
 
     public void Init(){
         Lives=MaxLives;
@@ -68,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
             LiveUIText.text=Lives.ToString();
 
             if(Lives==0){
-                GameManager.GetComponent<GameManager>().SetGameManagerState(global::GameManager.GameMangerState.GameOver);
+                GameManager.GetComponent<GameManager>().SetGameManagerState(1);  //setting game state to game over.
                 stop=true;
                 gameObject.SetActive(false);
             }

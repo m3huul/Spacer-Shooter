@@ -1,21 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyGun : MonoBehaviour
 {
-    public GameObject EnemyBullet;
+    [SerializeField] private GameObject EnemyBullet;
 
     // Start is called before the first frame update
     void Start()
     {
         Invoke("FireEnemyBullet",1f);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void FireEnemyBullet(){

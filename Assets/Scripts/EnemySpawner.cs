@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject Enemy;
+    [SerializeField] private GameObject Enemy;
     float MaxSpawnRate=7f;
 
     void SpawnEnemy(){
@@ -41,14 +39,14 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void StartSpawner(){
+    internal void StartSpawner(){
         MaxSpawnRate=7f;
         Invoke("SpawnEnemy",MaxSpawnRate);
 
         InvokeRepeating("IncSpawnRate",0f,20f);
     }
 
-    public void StopSpawner(){
+    internal void StopSpawner(){
         CancelInvoke("SpawnEnemy");
         CancelInvoke("IncSpawnRate");
     }

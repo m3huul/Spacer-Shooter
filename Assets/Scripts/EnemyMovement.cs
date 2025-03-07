@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    GameObject scoreTextUI;
-    float speed;
-    public GameObject ExplosionAinm;
-    Vector2 max;
+    [SerializeField] private GameObject ExplosionAinm;
+    private GameObject scoreTextUI;
+    private float speed;
+    private Vector2 max;
     // Start is called before the first frame update
     void Start()
     {

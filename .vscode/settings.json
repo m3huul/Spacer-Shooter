@@ -53,5 +53,6 @@
         "temp/":true,
         "Temp/":true
     },
-    "dotnet.defaultSolution": "Spacer-Shooter.sln"
+    "dotnet.defaultSolution": "Spacer-Shooter.sln",
+    "dotnet.preferCSharpExtension": true
 }

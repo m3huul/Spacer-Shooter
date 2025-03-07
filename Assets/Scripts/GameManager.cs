@@ -1,19 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject PlayerShip;
-    public GameObject EnemySpawner;
-    public GameObject scoreTextUI;
-    public GameObject TimeCounterUI;
-    public GameScore Current;
-    public Text HighScoreText;
-    public CanvasGroup GameplayUI;
-    public CanvasGroup OpeningUI;
-    public CanvasGroup GameOverUI;
+    [SerializeField] private GameObject PlayerShip;
+    [SerializeField] private GameObject EnemySpawner;
+    [SerializeField] private GameObject scoreTextUI;
+    [SerializeField] private GameObject TimeCounterUI;
+    [SerializeField] private GameScore Current;
+    [SerializeField] private Text HighScoreText;
+    [SerializeField] private CanvasGroup GameplayUI;
+    [SerializeField] private CanvasGroup OpeningUI;
+    [SerializeField] private CanvasGroup GameOverUI;
     public enum GameMangerState
     {
         Opening,
@@ -84,8 +83,15 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void SetGameManagerState(GameMangerState state){
-        GMState = state;
+    public void SetGameManagerState(int i){  //0 to set the gamestate to opening and 1 for game over.
+        switch(i){
+          case 0:
+            GMState = GameMangerState.Opening;
+            break;
+          case 1:
+            GMState = GameMangerState.GameOver;
+            break;
+        }
         UpdateGameManagerState();
     }
     
@@ -95,7 +101,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void ChangeToOpening(){
-        SetGameManagerState(GameMangerState.Opening);
+        SetGameManagerState(0); //setting game state to opening.
     }
 
     IEnumerator Lerp(CanvasGroup group, float seconds, float from, float to)
