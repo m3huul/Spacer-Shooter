@@ -37,6 +37,7 @@ self.addEventListener('install', function (e) {
 
 #if USE_DATA_CACHING
 self.addEventListener('fetch', function (e) {
+  console.log("Called")
   e.respondWith((async function () {
      try {
          const response = await caches.match(e.request);
