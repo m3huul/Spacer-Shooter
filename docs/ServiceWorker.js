@@ -4,8 +4,6 @@ const contentToCache = [
     "Build/docs.framework.js",
     "Build/docs.data",
     "Build/docs.wasm",
-    "TemplateData/style.css"
-
 ];
 
 self.addEventListener('install', function (e) {

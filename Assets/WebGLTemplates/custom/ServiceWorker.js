@@ -8,8 +8,6 @@ const contentToCache = [
 #endif
     "Build/{{{ DATA_FILENAME }}}",
     "Build/{{{ CODE_FILENAME }}}",
-    "TemplateData/style.css"
-
 ];
 #endif
 
