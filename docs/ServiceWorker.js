@@ -1,4 +1,4 @@
-const cacheName = "m3huul-SpaceShooter-1.1";
+const cacheName = "m3huul-SpaceShooter-1.2";
 const contentToCache = [
     "Build/docs.loader.js",
     "Build/docs.framework.js",
