@@ -57,7 +57,12 @@
         canvas.style.height = '100%';
       }
     }
-    window.addEventListener('load', resizeCanvas);
+    window.addEventListener('load', ()=>{
+      resizeCanvas()
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("ServiceWorker.js");
+      }
+    });
     window.addEventListener('resize', resizeCanvas);
     
     var buildUrl = "Build";
