@@ -1316,7 +1316,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Star: {fileID: 6340709408748385270, guid: 53a0f79b977b8d84ab1b8feb9a1e9a54, type: 3}
-  MaxStars: 250
+  MaxStars: 700
+  initOffset: {x: 7, y: 7}
   starColors:
   - {r: 0.5, g: 0.5, b: 1, a: 1}
   - {r: 0, g: 1, b: 1, a: 1}

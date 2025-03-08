@@ -3,8 +3,9 @@ using UnityEngine;
 public class Star : MonoBehaviour
 {
     [SerializeField] internal float speed;
-    Vector2 min;
-    Vector2 max;
+    private Vector2 min;
+    private Vector2 max;
+    private float offset = -10;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,9 +28,9 @@ public class Star : MonoBehaviour
 #else
         transform.position = new Vector2(position.x + speed * Time.deltaTime, position.y);
 
-        if (transform.position.x < min.x)
+        if (transform.position.x < min.x + offset)
         {
-            transform.position = new Vector2(max.x, Random.Range(min.y, max.y));
+            transform.position = new Vector2(max.x - offset, Random.Range(min.y, max.y));
         }
 #endif
     }
