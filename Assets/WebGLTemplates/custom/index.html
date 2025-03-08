@@ -57,11 +57,13 @@
         canvas.style.height = '100%';
       }
     }
-    window.addEventListener('load', ()=>{
+    window.addEventListener('load', function(){
       resizeCanvas()
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("ServiceWorker.js");
-      }
+      navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+        console.log('Service Worker registered with scope:', registration.scope);
+      }).catch(function(error) {
+        console.error('Service Worker registration failed:', error);
+      });
     });
     window.addEventListener('resize', resizeCanvas);
     

@@ -18,25 +18,40 @@ self.addEventListener('install', function (e) {
     
 #if USE_DATA_CACHING
     e.waitUntil((async function () {
-      const cache = await caches.open(cacheName);
-      console.log('[Service Worker] Caching all: app shell and content');
-      await cache.addAll(contentToCache);
+      try {
+          const cache = await caches.open(cacheName);
+          console.log('[Service Worker] Caching all: app shell and content');
+          for (const resource of contentToCache) {
+              try {
+                  await cache.add(resource);
+              } catch (error) {
+                  console.error(`[Service Worker] Failed to cache: ${resource}`, error);
+              }
+          }
+      } catch (error) {
+          console.error('[Service Worker] Failed to open cache', error);
+      }
     })());
 #endif
 });
 
 #if USE_DATA_CACHING
 self.addEventListener('fetch', function (e) {
-    e.respondWith((async function () {
-      let response = await caches.match(e.request);
-      console.log(`[Service Worker] Fetching resource: ${e.request.url}`);
-      if (response) { return response; }
+  e.respondWith((async function () {
+     try {
+         const response = await caches.match(e.request);
+         console.log(`[Service Worker] Fetching resource: ${e.request.url}`);
+         if (response) return response;
 
-      response = await fetch(e.request);
-      const cache = await caches.open(cacheName);
-      console.log(`[Service Worker] Caching new resource: ${e.request.url}`);
-      cache.put(e.request, response.clone());
-      return response;
-    })());
+         const fetchResponse = await fetch(e.request);
+         const cache = await caches.open(cacheName);
+         console.log(`[Service Worker] Caching new resource: ${e.request.url}`);
+         await cache.put(e.request, fetchResponse.clone());
+         return fetchResponse;
+     } catch (error) {
+         console.error(`[Service Worker] Error fetching resource: ${e.request.url}`, error);
+         throw error;
+     }
+ })());
 });
 #endif
